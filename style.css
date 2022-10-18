@@ -55,6 +55,9 @@ h2 {
   color: dodgerblue;
   cursor: pointer;
 }
+#player .choice {
+  text-transform: capitalize;
+}
 #computer .fa-regular,
 #computer .choice {
   color: rgb(235, 43, 52);
@@ -65,7 +68,7 @@ h2 {
 }
 
 #player .selected {
-  color: black;
+  color: black !important;
 }
 
 .reset-icon {
