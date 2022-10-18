@@ -10,7 +10,16 @@ const playerScissors = document.getElementById('playerScissors') as HTMLElement
 const playerLizard = document.getElementById('playerLizard') as HTMLElement
 const playerSpock = document.getElementById('playerSpock') as HTMLElement
 
+
 const allGameIcons: NodeListOf<HTMLElement> = document.querySelectorAll('.fa-regular')
+
+const choices = {
+  rock: { name: 'Rock', defeats: ['scissors', 'lizard'] },
+  paper: { name: 'Paper', defeats: ['rock', 'spock'] },
+  scissors: { name: 'Scissors', defeats: ['paper', 'lizard'] },
+  lizard: { name: 'Lizard', defeats: ['paper', 'spock'] },
+  spock: { name: 'Spock', defeats: ['scissors', 'rock'] },
+};
 
 let playerScore = 0;
 let computerScore = 0;
@@ -60,49 +69,44 @@ const computerSelect = () => {
 }
 //selects the winner based on the choices object
 const winnerSelect = (computerSelection: string, playerSelection: string) => {
-
-  const player = playerSelection.toLocaleLowerCase();
+  type ObjectKey = keyof typeof choices;
+  let player = playerSelection.toLocaleLowerCase() as ObjectKey;
   const computer = computerSelection.toLocaleLowerCase()
   //if the player chooses the same as the computer
   if (player === computer) {
-    resultText.textContent = 'It\'s a Draw!'
+    resultText.textContent = "It's a tie."
     return;
   }
+
   let isWinner = false;
   //if the player chooses rock
-  if (choices.rock.name.toLocaleLowerCase() === player) {
-    isWinner = choices.rock.defeats.includes(computer)
-  }
-  //if the player chooses paper
-  else if (choices.paper.name.toLocaleLowerCase() === player) {
-    isWinner = choices.paper.defeats.includes(computer)
-  }
-  //if the player chooses scissors
-  else if (choices.scissors.name.toLocaleLowerCase() === player) {
-    isWinner = choices.scissors.defeats.includes(computer)
-  }
-  //if the player chooses lizard
-  else if (choices.lizard.name.toLocaleLowerCase() === player) {
-    isWinner = choices.lizard.defeats.includes(computer)
-  }
-  //if the player chooses spock
-  else if (choices.spock.name.toLocaleLowerCase() === player) {
-    isWinner = choices.spock.defeats.includes(computer)
-  }
+  const choice = choices[player]
+  isWinner = choice.defeats.includes(computer)
   if (isWinner) {
-    playerScore++;
-    resultText.textContent = 'You Won!'
-    playerScoreEl.textContent = `${playerScore}`
+    playerWon()
   } else {
-    computerScore++;
-    resultText.textContent = 'You Lost!'
-    computerScoreEl.textContent = `${computerScore}`
+    computerWon()
   }
 }
-const choices = {
-  rock: { name: 'Rock', defeats: ['scissors', 'lizard'] },
-  paper: { name: 'Paper', defeats: ['rock', 'spock'] },
-  scissors: { name: 'Scissors', defeats: ['paper', 'lizard'] },
-  lizard: { name: 'Lizard', defeats: ['paper', 'spock'] },
-  spock: { name: 'Spock', defeats: ['scissors', 'rock'] },
-};
+const playerWon = () => {
+  playerScore++;
+  resultText.textContent = 'You Won!'
+  playerScoreEl.textContent = `${playerScore}`
+}
+const computerWon = () => {
+  computerScore++;
+  resultText.textContent = 'You Lost!'
+  computerScoreEl.textContent = `${computerScore}`
+}
+//rest game score and choices
+const reset = () => {
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreEl.textContent = `${playerScore}`
+  computerScoreEl.textContent = `${computerScore}`
+  playerChoice.textContent = ''
+  computerChoice.textContent = ''
+  resultText.textContent = ''
+  restSelected()
+}
+reset()

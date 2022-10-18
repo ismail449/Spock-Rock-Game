@@ -23,8 +23,8 @@
       <!-- Player container -->
       <div class="player-container" id="player">
         <h2>
-          You - <span id="player-score">0</span>
-          <span class="choice" id="player-choice">--- Choice</span>
+          You - <span id="player-score"></span>
+          <span class="choice" id="player-choice"></span>
         </h2>
         <i
           class="fa-regular fa-hand-back-fist"
@@ -60,8 +60,8 @@
       <!-- Computer container -->
       <div class="player-container" id="computer">
         <h2>
-          Computer - <span id="computer-score">0</span>
-          <span class="choice" id="computer-choice">--- Choice</span>
+          Computer - <span id="computer-score"></span>
+          <span class="choice" id="computer-choice"></span>
         </h2>
         <i
           class="fa-regular fa-hand-back-fist"
@@ -86,10 +86,14 @@
         ></i>
       </div>
       <!-- reset icon -->
-      <i class="fa-solid fa-rotate reset-icon" title="Rest"></i>
+      <i
+        class="fa-solid fa-rotate reset-icon"
+        onclick="reset()"
+        title="Rest"
+      ></i>
       <!-- results text -->
       <div class="result-container">
-        <h3 class="result-text" id="resultText">You Won!</h3>
+        <h3 class="result-text" id="resultText"></h3>
       </div>
     </div>
 
