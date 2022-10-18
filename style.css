@@ -67,7 +67,7 @@ h2 {
   margin-right: 0;
 }
 
-#player .selected {
+.selected {
   color: black !important;
 }
 
